@@ -5,9 +5,7 @@ import unittest
 import timeit
 import importlib
 import types
-
-numseq_root = 'numseq'  # change this to 'soln.numseq' to debug solution
-
+numseq_root = 'numseq'
 primes = (
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47,
     53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107,
@@ -58,7 +56,8 @@ class TestNumseq(unittest.TestCase):
         self.assertIsInstance(fib, types.ModuleType, fib)
         # just test first 30 terms
         for n, f in enumerate(fibs):
-            self.assertEqual(fib.fib(n), fibs[n], 'The Fibonacci terms are incorrect')
+            self.assertEqual(
+                fib.fib(n), fibs[n], 'The Fibonacci terms are incorrect')
 
     # def test_fib_performance(self):
     #     """Test speed performance of fibonacci algorithm"""
@@ -70,7 +69,8 @@ class TestNumseq(unittest.TestCase):
         geo = numseq_importer('geo')
         self.assertIsInstance(geo, types.ModuleType, geo)
         for n in range(-1000, 1000):
-            self.assertEqual(geo.square(n), n*n, 'The square terms are incorrect')
+            self.assertEqual(
+                geo.square(n), n*n, 'The square terms are incorrect')
 
     def test_cube(self):
         """test importability and correctness of cube terms"""
@@ -94,9 +94,11 @@ class TestNumseq(unittest.TestCase):
 
         for n in range(max(primes)):
             if n in primes:
-                self.assertTrue(prime.is_prime(n), str(n) + ' is a prime number')
+                self.assertTrue(prime.is_prime(n),
+                                str(n) + ' is a prime number')
             else:
-                self.assertFalse(prime.is_prime(n), str(n) + ' is NOT a prime number')
+                self.assertFalse(prime.is_prime(n), str(n) +
+                                 ' is NOT a prime number')
 
         self.assertTrue(prime.is_prime(999983), '999983 is prime')
         self.assertFalse(prime.is_prime(999981), '999981 is not prime')
@@ -128,11 +130,12 @@ class TestCodeQuality(unittest.TestCase):
         # This will generate 78498 prime numbers in about 1.5 seconds
         prime_time = timeit.Timer(
             lambda: self.prime.primes(1000000)
-            ).repeat(number=1, repeat=1)[0]
+        ).repeat(number=1, repeat=1)[0]
         hint = (
             'The primes(n) function took {} seconds to run,\n'
-            'which exceeds the allowed O(n) threshold of 1.5 seconds'.format(prime_time)
-            )
+            'which exceeds the allowed O(n) threshold of 1.5 seconds'.format(
+                prime_time)
+        )
         self.assertLessEqual(prime_time, 1.5, hint)
 
     # TODO
@@ -145,7 +148,7 @@ class TestCodeQuality(unittest.TestCase):
             self.assertIsNotNone(
                 func.__doc__,
                 'function "{}" is missing a docstring'.format(func.__name__)
-                )
+            )
             # arbitrary length test of at least 10 chars
             self.assertGreaterEqual(len(func.__doc__), 10)
 
