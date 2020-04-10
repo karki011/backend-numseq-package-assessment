@@ -1,3 +1,9 @@
+__author__ = """
+https://stackoverflow.com/questions/2068372/
+fastest-way-to-list-all-primes-below-n""
+"""
+
+
 def primes(n):
     """ primes(n): Returns a list of all prime numbers less than n """
     numbers = set(range(n, 1, -1))
